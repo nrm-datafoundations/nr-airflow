@@ -108,7 +108,7 @@ with DAG(
                 DAG = str(DAG)
 
                 g = Github(github_secret)
-                repo = g.get_repo('bcgov/nr-airflow')
+                repo = g.get_repo('nrm-datafoundations/nr-airflow')
 
                 repo.create_file(f'dags/{dag_id}.py', 'upload dags', DAG, branch='main')
                 existing_dag_list.append(application)
