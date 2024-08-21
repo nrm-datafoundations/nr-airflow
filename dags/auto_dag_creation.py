@@ -44,8 +44,8 @@ def execute_python_script():
     conn.close()
     
     g = Github(github_secret)
-    repo = g.get_repo("bcgov/nr-airflow")
-    contents = repo.get_contents("/dags", ref="a1b9b0-dev")
+    repo = g.get_repo("nrm-datafoundations/nr-airflow")
+    contents = repo.get_contents("/dags", ref="main")
     existing_dags= [c.path for c in contents]
     existing_dag_list = []
     prefix = "dags/pipeline-"
@@ -110,7 +110,7 @@ with DAG(
                 g = Github(github_secret)
                 repo = g.get_repo('bcgov/nr-airflow')
 
-                repo.create_file(f'dags/{dag_id}.py', 'upload dags', DAG, branch='a1b9b0-dev')
+                repo.create_file(f'dags/{dag_id}.py', 'upload dags', DAG, branch='main')
                 existing_dag_list.append(application)
 
 
@@ -119,7 +119,7 @@ with DAG(
     default_args=default_args,
     description='Execute Python script',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2024, 5, 14),
+    start_date=datetime(2024, 8, 20),
     tags=['ui-automation'],
 ) as dag:
 
